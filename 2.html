@@ -160,6 +160,7 @@
             }
             const isTeleport = teleport(avatar.offsetLeft, avatar.offsetTop);
             if(isTeleport){window.location.replace(window.location.origin + "/map.github.io/");}
+            console.log(`Avatar move: ${window.location.origin + "/map.github.io/"}`);
             const isCollide = collidePopUp(avatar.offsetLeft, avatar.offsetTop);
             if(isCollide){
                 console.log("Collided with pop-up!");
