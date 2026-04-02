@@ -38,6 +38,18 @@
         left: 0px;
         animation: walk-front 2s linear forwards;
     }
+
+    .bus{
+        background-image: url("img/bus-1.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 480px;
+        height: 360px;
+        position: absolute;
+        top: 300px;
+        left: 250px;
+        animation: bus-move 1s linear infinite;
+    }
     
     .navigate{
         width: 200px;
@@ -71,11 +83,17 @@
         50% {background-image: url("img/girl-back-2.png");}
         100% {background-image: url("img/girl-back-3.png");}
     }
+
+    @keyframes bus-move{
+        0% {background-image: url("img/bus-1.png");}
+        100% {background-image: url("img/bus-2.png");}
+    }
 </style>
 
 <body>
     <div class="map">
         <!-- <div class="navigate"></div> -->
+         <div class="bus"></div>
         <div class="avatar"></div>
     </div>
     
