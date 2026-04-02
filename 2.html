@@ -22,7 +22,7 @@
     .map{
         width: 100vh;
         height: 100vh;
-        background-image: url("img/bus-stop.PNG");
+        background-image: url("img/cuisine.png");
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -36,16 +36,18 @@
         position: absolute;
         top: 0px;
         left: 0px;
-        animation: walk-front 2s linear forwards;
+        animation: walk-front 1s linear forwards;
     }
     
-    .navigate{
+    .popUp{
         width: 200px;
-        height: 200px;
-        background-color: rgb(236, 146, 37);
+        height: 50px;
+        text-align: center;
+        background-color: rgb(255, 242, 227);
+        color: black;
         position: absolute;
-        top: 0px;
-        left: 0px;
+        top: 200px;
+        left: 200px;
     }
 
     @keyframes walk-front{
@@ -76,6 +78,7 @@
 <body>
     <div class="map">
         <!-- <div class="navigate"></div> -->
+         <h3 class="popUp" style="display: none;">這是麵店!</h3>
         <div class="avatar"></div>
     </div>
     
@@ -83,6 +86,7 @@
 
 <script>
     const avatar = document.getElementsByClassName('avatar')[0];
+    const popUp = document.getElementsByClassName('popUp')[0];
 
     document.addEventListener('keydown', (event) => {
         const key = event.key;
@@ -101,46 +105,77 @@
         if (key === "ArrowLeft") {
             if (avatar.offsetLeft == 0) {
                 avatar.style.backgroundImage = "url('img/girl-left-1.png')";
+                return;
             } else {
                 avatar.style.left = (avatar.offsetLeft - 50) + "px";
                 avatar.style.animationName = "walk-left";
             }
             const isTeleport = teleport(avatar.offsetLeft, avatar.offsetTop);
-            if(isTeleport){window.location.replace("2.html");}
+            if(isTeleport){window.location.replace("index.html");}
+
+            const isCollide = collidePopUp(avatar.offsetLeft, avatar.offsetTop);
+            if(isCollide){
+                console.log("Collided with pop-up!");
+                popUp.setAttribute("style", "display: ''");
+            }else{
+                popUp.setAttribute("style", "display: none");}
 
         } else if (key === "ArrowRight") {
             if (avatar.offsetLeft + avatar.offsetWidth + 50 > maxHeight) {
                 console.log("Reached the right edge of the screen.");
                 avatar.style.backgroundImage = "url('img/girl-right-1.png')";
+                return;
             } else {
                 avatar.style.left = (avatar.offsetLeft + 50) + "px";
                 avatar.style.animationName = "walk-right";
             }
-            // const isTeleport = teleport(avatar.offsetLeft, avatar.offsetTop);
-            // if(isTeleport){window.location.replace("2.html");}
+            const isCollide = collidePopUp(avatar.offsetLeft, avatar.offsetTop);
+            if(isCollide){
+                console.log("Collided with pop-up!");
+                popUp.setAttribute("style", "display: ''");
+            }else{
+                popUp.setAttribute("style", "display: none");}
         } else if (key === "ArrowUp") {
             if (avatar.offsetTop == 0) {
                 avatar.style.backgroundImage = "url('img/girl-back-1.png')";
+                return;
             } else {
                 avatar.style.top = (avatar.offsetTop - 50) + "px";
                 avatar.style.animationName = "walk-back";
             }
-            const isTeleport = teleport(avatar.offsetLeft, avatar.offsetTop);
-            if(isTeleport){window.location.replace("2.html");}
+            const isCollide = collidePopUp(avatar.offsetLeft, avatar.offsetTop);
+            if(isCollide){
+                console.log("Collided with pop-up!");
+                popUp.setAttribute("style", "display: ''");
+            }else{
+                popUp.setAttribute("style", "display: none");}
         } else if (key === "ArrowDown") {
             if (avatar.offsetTop + avatar.offsetHeight + 50 > maxHeight) {
                 console.log("Reached the bottom edge of the screen.");
                 avatar.style.backgroundImage = "url('img/girl-front-1.png')";
+                return;
             } else {
                 avatar.style.top = (avatar.offsetTop + 50) + "px";
                 avatar.style.animationName = "walk-front";
             }
-            
+            const isTeleport = teleport(avatar.offsetLeft, avatar.offsetTop);
+            if(isTeleport){window.location.replace("index.html");}
+            const isCollide = collidePopUp(avatar.offsetLeft, avatar.offsetTop);
+            if(isCollide){
+                console.log("Collided with pop-up!");
+                popUp.setAttribute("style", "display: ''");
+            }else{
+                popUp.setAttribute("style", "display: none");}
         }
     });
 
     function teleport(left, top){
         if(left == 0 && top == 0){return true;}
+        else {return false;}
+    }
+
+    function collidePopUp(left, top){
+        if(left == 250 && top == 250){return true;}
         else {return false;}
     }
 </script>
