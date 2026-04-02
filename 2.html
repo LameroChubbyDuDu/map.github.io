@@ -149,6 +149,7 @@
                 popUp.setAttribute("style", "display: ''");
             }else{
                 popUp.setAttribute("style", "display: none");}
+                
             const isTeleport = teleport(avatar.offsetLeft, avatar.offsetTop);
             if(isTeleport){window.location.replace(window.location.origin + "/map.github.io/");}
         } else if (key === "ArrowDown") {
@@ -160,8 +161,6 @@
                 avatar.style.top = (avatar.offsetTop + 50) + "px";
                 avatar.style.animationName = "walk-front";
             }
-            
-            console.log(`Avatar move: ${window.location.origin + "/map.github.io/"}`);
             const isCollide = collidePopUp(avatar.offsetLeft, avatar.offsetTop);
             if(isCollide){
                 console.log("Collided with pop-up!");
