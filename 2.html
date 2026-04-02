@@ -34,7 +34,7 @@
         width: 200px;
         height: 200px;
         position: absolute;
-        top: 0px;
+        top: 200px;
         left: 0px;
         animation: walk-front 1s linear forwards;
     }
@@ -149,7 +149,7 @@
                 popUp.setAttribute("style", "display: ''");
             }else{
                 popUp.setAttribute("style", "display: none");}
-                
+
             const isTeleport = teleport(avatar.offsetLeft, avatar.offsetTop);
             if(isTeleport){window.location.replace(window.location.origin + "/map.github.io/");}
         } else if (key === "ArrowDown") {
@@ -171,7 +171,7 @@
     });
 
     function teleport(left, top){
-        if(left == 0 && top == 0){return true;}
+        if(left == 0 && top == 250){return true;}
         else {return false;}
     }
 
